@@ -1,12 +1,9 @@
+//un package qui permet de limiter le nombre de requêtes à la suite
 const rateLimit = require("express-rate-limit");
- 
-// Enable if you're behind a reverse proxy (Heroku, Bluemix, AWS ELB, Nginx, etc)
-// see https://expressjs.com/en/guide/behind-proxies.html
-// app.set('trust proxy', 1);
  
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100
+  max: 100  // 100 tentatives maximum
 });
 
 module.exports = apiLimiter;

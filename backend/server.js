@@ -1,4 +1,15 @@
+//import du package http de node : accès à l'objet http
 const http = require('http');
+
+//création du serveur avec la méthode createServer du package http
+//methode qui prend comme argument cette fonction qui sera appelée à chaque requète http
+//cette fonction reçoit 2 arguments : la requète et la réponse (req, res)
+/* example: 
+const server = http.createServer((req, res) => {
+    res.end('Voilà la réponse du serveur !');
+});*/
+
+//import de l'application
 const app = require('./app');
 
 const normalizePort = val => {
@@ -13,8 +24,10 @@ const normalizePort = val => {
   return false;
 };
 
-//pluggin dotenv pour
+//pluggin dotenv pour sécuriser la BD => ".env"
 const port = normalizePort(process.env.PORT || '3000');
+
+//dire à l'app express sur quel PORT elle doit touner
 app.set('port', port);
 
 

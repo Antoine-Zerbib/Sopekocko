@@ -1,3 +1,4 @@
+//import des packages
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -12,6 +13,7 @@ const helmet = require("helmet")
 const apiLimiter = require("./middleware/expressRateLimit");
 const path = require('path'); 
 
+//import des routes
 const sauceRoutes = require('./routes/sauces'); 
 const userRoutes = require('./routes/user');
 
@@ -24,13 +26,15 @@ mongoose.connect(process.env.MONGO_URL_USER,
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
+//création de l'application (vide) qui va appeler la methode express
+// => application express
 const app = express();
 
 //appLimiter va empécher de forcer l'app avec des req à répétition
 //s'applique seulement aux requêtes commençant par /api/
 app.use("/api/", apiLimiter);
 
-//helmet va sércuriser les HTTP headers de Express app
+//helmet va sécuriser les HTTP headers de Express app
 app.use(helmet());
 
 // CORS
@@ -44,12 +48,20 @@ app.use((req, res, next) => {
 // Body parser
 app.use(bodyParser.json());
 
+//ajustement multer
+    //Pour dire à notre app express de servir le dossier image quand on fait une requête à /images
+    //=> on va créer un middleware qui va répondre aux req envoyées à /images
+    //2e argument on veut qu'il serve le dossier static (/image)    
+    //on ne connais pas le chemin à l'avance donc : nouvelle importation nodes L.4
+    //'__dirname' => nom du dossier dans lequel on va se trouver auquel on va rajouter 'images'
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-//changement de la route 'stuff' du cours par 'sauces'
+//le début dela route, ! ATTENTION ! il ne faut pas mettre le point ./api/sauces => error
 app.use('/api/sauces', sauceRoutes); 
 app.use('/api/auth', userRoutes); 
 
+//export de l'application pour y accéder depuis les autres fichiers
+//notamment le serveur nodes
 module.exports = app;
 
 
