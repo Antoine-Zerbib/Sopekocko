@@ -74,7 +74,7 @@ exports.login = (req, res, next) => {
                             { userId: user._id }, 
 
                             //2e argument => clef secrète pour le codage créée par jwt
-                            'RANDOM_TOKEN_SECRET',
+                            'env.TOKEN_USER',
 
                             //3e argument => argument de configuration
                             { expiresIn: '24h'}

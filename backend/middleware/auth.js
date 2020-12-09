@@ -13,7 +13,7 @@ module.exports = (req, res, next) => { //export d'un middleware classique
 
         //décoder le token avec le package
         //verifie le token avec la clef secrète qui doit correspondre à celle dans la fonction login
-        const decodedToken = jwt.verify(token, 'RANDOM_TOKEN_SECRET'); 
+        const decodedToken = jwt.verify(token, 'env.TOKEN_USER'); 
         //si la vérif échoue => catch
 
         //on va extraire l'objet js dans le token : userId
