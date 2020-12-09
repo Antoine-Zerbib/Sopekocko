@@ -5,8 +5,6 @@ const Sauce = require('../models/Sauce');
 //import du package fs de nodes
 const fs = require('fs'); //donne accès aux différentes opérations liées au système de fichier
 
-//regex :
-const regex = /^[a-zA-Z0-9 _.,!()&]+$/;
 
 /* --  CREATE  -- */
 
@@ -155,6 +153,8 @@ exports.likeSauce = (req, res, next) => {
                 if (sauce.usersLiked.find(user => user === req.body.userId)) {
                     Sauce.updateOne({ _id : req.params.id }, {
                         $inc: {likes:-1},
+                        
+                        //supprime l'Id de l'utilisateur
                         $pull: {usersLiked: req.body.userId},
                         _id: req.params.id
                     })
