@@ -29,21 +29,13 @@ const storage = multer.diskStorage({ // diskStorage : fonction de multer pour en
         callback(null, 'images') //2e argument nom deu dossier
     },
 
-    // 2 -  deuxieme élément qui explique à multer quel nom de fichier utiliser
-        //on ne peut pas se permettre d'utiliser le nom de fichier d'origine, sinon
-        //on risquerait d'avoir des pb lorsque 2 fichiers aurait le même nom.
+    // 2 -   élément qui explique à multer quel nom de fichier utiliser
     filename: (req, file, callback) => {
 
-        //ici on génère le nouveau nom pour le fichier
-            //partie avant l'extension => nom d'origine du fichier
-            //.split(' ') pour faire un tableau du nom en separant les strings autour des espaces
-            //.join('_') pour joindre les parties du tableau avec des underscores à la place des espaces
+        //on génère le nouveau nom pour le fichier
         const name = file.originalname.split(' ').join('_');
 
-        //l'extension du fichier
-            // on va utiliser le MIME TYPE du fichier pour générer son extension
-            //création du dictionnaire L.15
-            //l'extension => élément de notre dictionnaire qui correspond au mimetype du fichier envoyé par le frontend
+        //l'extension du fichier : MIME TYPE (dictionnaire L.15)
         const extension = MIME_TYPES[file.mimitype]; 
 
         //création du filename entier
@@ -54,7 +46,4 @@ const storage = multer.diskStorage({ // diskStorage : fonction de multer pour en
 })
 
 //exportation du middleware multer configuré
-    //appel de la méthode multer dans laquelle on passe notre objet storage
-    //on appelle la méthode single pour dire qu'il s'agit d'un fichier unique et non pas un grp de fichiers
-    //et on explique à multer qu'il s'agit de fichier image uniquement
 module.exports = multer({ storage }).single('image');

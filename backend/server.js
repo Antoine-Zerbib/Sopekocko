@@ -1,13 +1,7 @@
 //import du package http de node : accès à l'objet http
 const http = require('http');
 
-//création du serveur avec la méthode createServer du package http
-//methode qui prend comme argument cette fonction qui sera appelée à chaque requète http
-//cette fonction reçoit 2 arguments : la requète et la réponse (req, res)
-/* example: 
-const server = http.createServer((req, res) => {
-    res.end('Voilà la réponse du serveur !');
-});*/
+
 
 //import de l'application
 const app = require('./app');
@@ -51,6 +45,7 @@ const errorHandler = error => {
   }
 };
 
+//création du serveur avec la méthode createServer du package 'http'
 const server = http.createServer(app);
 
 server.on('error', errorHandler);
