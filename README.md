@@ -17,4 +17,7 @@ console when the server starts, e.g. `Listening on port 3001`.
 ### Mandatory ###
 
 Run `ng serve` on frontend file and `nodemon server` on backend file 
-`.env` file should be created with `MONGO_URL_USER`,`MONGO_URL_ADMIN`and`TOKEN_USER`
+`.env` file should be created and filled with :
+MONGO_URL_USER=mongodb+srv://User-SoPekocko:Sn0wb0ard@cluster0.zq6kf.mongodb.net/Cluster0?retryWrites=true&w=majority
+MONGO_URL_ADMIN=mongodb+srv://Admin-SoPekocko:Sn0wb0ard@cluster0.zq6kf.mongodb.net/Cluster0?retryWrites=true&w=majority
+TOKEN_USER=RANDOM_TOKEN_SECRET
